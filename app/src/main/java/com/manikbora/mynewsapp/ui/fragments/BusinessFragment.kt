@@ -52,13 +52,12 @@ class BusinessFragment : Fragment(), NewsAdapter.OnArticleClickListener {
             }
         }).get(BusinessViewModel::class.java)
 
-        // Observe business news data
         businessViewModel.businessNews.observe(viewLifecycleOwner, Observer { articles ->
             businessNewsAdapter.submitList(articles)
         })
 
-        // Fetch business news data for a specific country (e.g., "us" for United States)
-        businessViewModel.fetchBusinessNews("in")
+        // Fetch business news data
+        businessViewModel.fetchBusinessNews()
 
         return view
     }
