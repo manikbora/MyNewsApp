@@ -5,13 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.manikbora.mynewsapp.R
 import com.manikbora.mynewsapp.databinding.FragmentHomeBinding
-import com.manikbora.mynewsapp.ui.adapters.HeadlinesAdapter
 import com.manikbora.mynewsapp.ui.adapters.HeadlinesPagerAdapter
 
 

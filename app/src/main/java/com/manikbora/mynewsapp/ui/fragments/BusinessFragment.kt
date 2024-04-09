@@ -1,20 +1,75 @@
 package com.manikbora.mynewsapp.ui.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.manikbora.mynewsapp.R
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.manikbora.mynewsapp.data.api.RetrofitClient
+import com.manikbora.mynewsapp.data.repository.NewsRepository
+import com.manikbora.mynewsapp.databinding.FragmentBusinessBinding
+import com.manikbora.mynewsapp.ui.adapters.NewsAdapter
+import com.manikbora.mynewsapp.ui.viewmodels.BusinessViewModel
 
-class BusinessFragment : Fragment() {
+class BusinessFragment : Fragment(), NewsAdapter.OnArticleClickListener {
+
+    private lateinit var businessViewModel: BusinessViewModel
+    private lateinit var businessNewsAdapter: NewsAdapter
+    private var _binding: FragmentBusinessBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_business, container, false)
+    ): View {
+        _binding = FragmentBusinessBinding.inflate(inflater, container, false)
+        val view = binding.root
+
+        businessNewsAdapter = NewsAdapter(this)
+
+        val recyclerView = binding.rvBusiness
+        recyclerView.adapter = businessNewsAdapter
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        // Create instance of NewsApiService
+        val newsApiService = RetrofitClient.createService()
+
+        // Create NewsRepository instance with NewsApiService
+        val newsRepository = NewsRepository(newsApiService)
+
+        businessViewModel = ViewModelProvider(this, object : ViewModelProvider.Factory {
+            override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                if (modelClass.isAssignableFrom(BusinessViewModel::class.java)) {
+                    @Suppress("UNCHECKED_CAST")
+                    return BusinessViewModel(newsRepository) as T
+                }
+                throw IllegalArgumentException("Unknown ViewModel class")
+            }
+        }).get(BusinessViewModel::class.java)
+
+        // Observe business news data
+        businessViewModel.businessNews.observe(viewLifecycleOwner, Observer { articles ->
+            businessNewsAdapter.submitList(articles)
+        })
+
+        // Fetch business news data for a specific country (e.g., "us" for United States)
+        businessViewModel.fetchBusinessNews("in")
+
+        return view
     }
 
+    override fun onArticleClicked(articleUrl: String) {
+        val action = HomeFragmentDirections.actionHomeFragmentToArticleFragment(articleUrl)
+        findNavController().navigate(action)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

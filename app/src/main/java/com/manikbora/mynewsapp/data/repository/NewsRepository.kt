@@ -30,4 +30,8 @@ class NewsRepository(private val newsApiService: NewsApiService) {
         return newsApiService.getTopHeadlines(country, Constants.API_KEY)
     }
 
+    suspend fun getBusinessNews(country: String): Response<NewsResponse> {
+        return newsApiService.getBusinessNews(country, Constants.API_KEY)
+    }
+
 }

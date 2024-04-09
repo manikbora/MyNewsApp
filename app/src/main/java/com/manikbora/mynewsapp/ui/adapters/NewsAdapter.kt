@@ -2,7 +2,6 @@ package com.manikbora.mynewsapp.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -11,10 +10,9 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.manikbora.mynewsapp.R
 import com.manikbora.mynewsapp.data.model.Article
 import com.manikbora.mynewsapp.databinding.ItemNewsBinding
-import com.manikbora.mynewsapp.ui.fragments.HeadlinesFragmentDirections
 
-class HeadlinesAdapter(private val listener: OnArticleClickListener) :
-    ListAdapter<Article, HeadlinesAdapter.ViewHolder>(DiffCallback()) {
+class NewsAdapter(private val listener: OnArticleClickListener) :
+    ListAdapter<Article, NewsAdapter.ViewHolder>(DiffCallback()) {
 
     interface OnArticleClickListener {
         fun onArticleClicked(articleUrl: String)

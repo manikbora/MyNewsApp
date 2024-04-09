@@ -8,19 +8,18 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.manikbora.mynewsapp.data.api.RetrofitClient
 import com.manikbora.mynewsapp.data.repository.NewsRepository
 import com.manikbora.mynewsapp.databinding.FragmentHeadlinesBinding
-import com.manikbora.mynewsapp.ui.adapters.HeadlinesAdapter
+import com.manikbora.mynewsapp.ui.adapters.NewsAdapter
 import com.manikbora.mynewsapp.ui.viewmodels.HeadlinesViewModel
 
-class HeadlinesFragment : Fragment(), HeadlinesAdapter.OnArticleClickListener {
+class HeadlinesFragment : Fragment(), NewsAdapter.OnArticleClickListener {
 
     private lateinit var headlinesViewModel: HeadlinesViewModel
-    private lateinit var headlinesAdapter: HeadlinesAdapter
+    private lateinit var headlinesNewsAdapter: NewsAdapter
 
     private var _binding: FragmentHeadlinesBinding? = null
     private val binding get() = _binding!!
@@ -33,10 +32,10 @@ class HeadlinesFragment : Fragment(), HeadlinesAdapter.OnArticleClickListener {
         _binding = FragmentHeadlinesBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        headlinesAdapter = HeadlinesAdapter(this)
+        headlinesNewsAdapter = NewsAdapter(this)
 
         val recyclerView = binding.rvHeadlines
-        recyclerView.adapter = headlinesAdapter
+        recyclerView.adapter = headlinesNewsAdapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         // Create instance of NewsApiService
@@ -58,7 +57,7 @@ class HeadlinesFragment : Fragment(), HeadlinesAdapter.OnArticleClickListener {
 
 
         headlinesViewModel.topHeadlines.observe(viewLifecycleOwner, Observer { articles ->
-            headlinesAdapter.submitList(articles)
+            headlinesNewsAdapter.submitList(articles)
         })
 
         // Fetch top headlines when the fragment is created
