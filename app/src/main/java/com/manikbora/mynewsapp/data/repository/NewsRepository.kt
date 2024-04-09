@@ -31,7 +31,27 @@ class NewsRepository(private val newsApiService: NewsApiService) {
     }
 
     suspend fun getBusinessNews(): Response<NewsResponse> {
-        return newsApiService.getBusinessNews(Constants.API_KEY)
+        return newsApiService.getBusinessNews(query = "business", apiKey = Constants.API_KEY)
+    }
+
+    suspend fun getEntertainmentNews(): Response<NewsResponse> {
+        return newsApiService.getEntertainmentNews(query = "entertainment", apiKey = Constants.API_KEY)
+    }
+
+    suspend fun getSportsNews(): Response<NewsResponse> {
+        return newsApiService.getSportsNews(query = "sports", apiKey = Constants.API_KEY)
+    }
+
+    suspend fun getHealthNews(): Response<NewsResponse> {
+        return newsApiService.getHealthNews(query = "health", apiKey = Constants.API_KEY)
+    }
+
+    suspend fun getScienceNews(): Response<NewsResponse> {
+        return newsApiService.getScienceNews(query = "science", apiKey = Constants.API_KEY)
+    }
+
+    suspend fun getTechnologyNews(): Response<NewsResponse> {
+        return newsApiService.getTechnologyNews(query = "technology", apiKey = Constants.API_KEY)
     }
 
 }

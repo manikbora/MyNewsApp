@@ -12,37 +12,32 @@ import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.net.UnknownHostException
 
-class BusinessViewModel(private val repository: NewsRepository) : ViewModel() {
+class HealthViewModel(private val repository: NewsRepository) : ViewModel()  {
 
-    private val _businessNews = MutableLiveData<List<Article>>()
-    val businessNews: LiveData<List<Article>> get() = _businessNews
+    private val _healthNews = MutableLiveData<List<Article>>()
+    val healthNews: LiveData<List<Article>> get() = _healthNews
 
     private var isDataLoaded = false
 
-    fun fetchBusinessNews() {
+    fun fetchHealthNews() {
         if (!isDataLoaded) {
             viewModelScope.launch(Dispatchers.IO) {
                 try {
-                    val response = repository.getBusinessNews()
+                    val response = repository.getHealthNews()
                     if (response.isSuccessful) {
                         val articles = response.body()?.articles ?: emptyList()
-                        _businessNews.postValue(articles)
+                        _healthNews.postValue(articles)
                         isDataLoaded = true
-
-                        // Log the complete endpoint URL
-                        val endpoint = response.raw().request.url.toString()
-                        Log.d("BusinessViewModel", "Business news endpoint: $endpoint")
-
                     } else {
                         val endpoint = response.raw().request.url.toString()
-                        Log.d("BusinessViewModel", "Error fetching business news: $endpoint")
+                        Log.d("NewsApp", "Error fetching business news: $endpoint")
                     }
                 } catch (e: UnknownHostException) {
-                    Log.d("BusinessViewModel", "Network error: ${e.message}")
+                    Log.d("NewsApp", "Network error: ${e.message}")
                 } catch (e: HttpException) {
-                    Log.d("BusinessViewModel", "HTTP error: ${e.message}")
+                    Log.d("NewsApp", "HTTP error: ${e.message}")
                 } catch (e: Exception) {
-                    Log.d("BusinessViewModel", "Exception: ${e.message}")
+                    Log.d("NewsApp", "Exception: ${e.message}")
                 }
             }
         }
