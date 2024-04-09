@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/country_india"
+        android:title="India" />
+    <item
+        android:id="@+id/country_usa"
+        android:title="USA" />
+    <item
+        android:id="@+id/country_england"
+        android:title="England" />
+    <item
+        android:id="@+id/country_germany"
+        android:title="Germany" />
+    <item
+        android:id="@+id/country_russia"
+        android:title="Russia" />
+</menu>
