@@ -1,16 +1,16 @@
 package com.manikbora.mynewsapp.ui.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import android.util.Log // Import Log class
 import com.manikbora.mynewsapp.data.model.Article
 import com.manikbora.mynewsapp.data.repository.NewsRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-
-// BusinessViewModel.kt
+import retrofit2.HttpException
+import java.net.UnknownHostException
 
 class BusinessViewModel(private val repository: NewsRepository) : ViewModel() {
 
@@ -29,17 +29,21 @@ class BusinessViewModel(private val repository: NewsRepository) : ViewModel() {
                         _businessNews.postValue(articles)
                         isDataLoaded = true
 
-                        // Log success message and number of articles fetched
-                        Log.d("BusinessViewModel", "Business news fetched successfully")
-                        Log.d("BusinessViewModel", "Number of articles fetched: ${articles.size}")
+                        // Log the complete endpoint URL
+                        val endpoint = response.raw().request.url.toString()
+                        Log.d("BusinessViewModel", "Business news endpoint: $endpoint")
+
                     } else {
-                        Log.e("BusinessViewModel", "Error fetching business news: ${response.message()}")
+                        println("Error fetching business news: ${response.message()}")
                     }
+                } catch (e: UnknownHostException) {
+                    println("Network error: ${e.message}")
+                } catch (e: HttpException) {
+                    println("HTTP error: ${e.message}")
                 } catch (e: Exception) {
-                    Log.e("BusinessViewModel", "Exception: ${e.message}", e)
+                    println("Exception: ${e.message}")
                 }
             }
         }
     }
 }
-
