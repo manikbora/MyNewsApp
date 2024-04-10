@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.manikbora.mynewsapp.R
 import com.manikbora.mynewsapp.data.api.RetrofitClient
+import com.manikbora.mynewsapp.data.database.NewsDatabase
 import com.manikbora.mynewsapp.data.repository.NewsRepository
 import com.manikbora.mynewsapp.databinding.FragmentEntertainmentBinding
 import com.manikbora.mynewsapp.ui.adapters.NewsAdapter
@@ -41,8 +42,9 @@ class EntertainmentFragment : Fragment(), NewsAdapter.OnArticleClickListener {
         // Create instance of NewsApiService
         val newsApiService = RetrofitClient.createService()
 
-        // Create NewsRepository instance with NewsApiService
-        val newsRepository = NewsRepository(newsApiService)
+        val newsDatabase = NewsDatabase.getDatabase(requireContext()) // Obtain an instance of NewsDatabase
+        val savedArticleDao = newsDatabase.savedArticleDao() // Get the savedArticleDao from NewsDatabase
+        val newsRepository = NewsRepository(newsApiService, savedArticleDao)
 
         entertainmentViewModel = ViewModelProvider(this, object : ViewModelProvider.Factory {
             override fun <T : ViewModel> create(modelClass: Class<T>): T {

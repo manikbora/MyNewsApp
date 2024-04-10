@@ -49,4 +49,5 @@ interface NewsApiService {
         @Query("q") query: String = "technology",
         @Query("apiKey") apiKey: String = API_KEY
     ): Response<NewsResponse>
+
 }

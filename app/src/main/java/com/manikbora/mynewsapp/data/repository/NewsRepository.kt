@@ -8,7 +8,8 @@ import com.manikbora.mynewsapp.data.model.SavedArticle
 import com.manikbora.mynewsapp.utils.Constants
 import retrofit2.Response
 
-class NewsRepository(private val newsApiService: NewsApiService) {
+class NewsRepository(private val newsApiService: NewsApiService,
+                     private val savedArticleDao: SavedArticleDao) {
 
 //    suspend fun insertArticle(article: SavedArticle) {
 //        savedArticleDao.insertArticle(article)
@@ -52,6 +53,14 @@ class NewsRepository(private val newsApiService: NewsApiService) {
 
     suspend fun getTechnologyNews(): Response<NewsResponse> {
         return newsApiService.getTechnologyNews(query = "technology", apiKey = Constants.API_KEY)
+    }
+
+    suspend fun insertSavedArticle(savedArticle: SavedArticle) {
+        savedArticleDao.insertArticle(savedArticle)
+    }
+
+    suspend fun getAllSavedArticles(): List<SavedArticle> {
+        return savedArticleDao.getAllSavedArticles()
     }
 
 }
