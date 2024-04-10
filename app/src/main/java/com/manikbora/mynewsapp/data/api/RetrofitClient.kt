@@ -14,10 +14,6 @@ object RetrofitClient {
             .build()
     }
 
-    val newsApiService: NewsApiService by lazy {
-        retrofit.create(NewsApiService::class.java)
-    }
-
     fun createService(): NewsApiService {
         return retrofit.create(NewsApiService::class.java)
     }

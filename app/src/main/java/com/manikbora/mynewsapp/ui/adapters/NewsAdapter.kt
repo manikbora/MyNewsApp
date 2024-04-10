@@ -18,7 +18,6 @@ class NewsAdapter(private val listener: OnArticleClickListener) :
         fun onArticleClicked(articleUrl: String)
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemNewsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)

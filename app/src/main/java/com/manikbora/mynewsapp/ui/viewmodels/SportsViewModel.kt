@@ -28,14 +28,6 @@ class SportsViewModel(private val repository: NewsRepository) : ViewModel()  {
                         val articles = response.body()?.articles ?: emptyList()
                         _sportsNews.postValue(articles)
                         isDataLoaded = true
-
-                        // Log the complete endpoint URL
-                        val endpoint = response.raw().request.url.toString()
-                        Log.d("SportsViewModel", "Business news endpoint: $endpoint")
-
-                    } else {
-                        val endpoint = response.raw().request.url.toString()
-                        Log.d("SportsViewModel", "Error fetching business news: $endpoint")
                     }
                 } catch (e: UnknownHostException) {
                     Log.d("SportsViewModel", "Network error: ${e.message}")

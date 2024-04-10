@@ -1,5 +1,6 @@
 package com.manikbora.mynewsapp.ui.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,6 +9,8 @@ import com.manikbora.mynewsapp.data.model.Article
 import com.manikbora.mynewsapp.data.repository.NewsRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
+import java.net.UnknownHostException
 
 class HeadlinesViewModel(private val repository: NewsRepository) : ViewModel() {
 
@@ -24,11 +27,13 @@ class HeadlinesViewModel(private val repository: NewsRepository) : ViewModel() {
                     if (response.isSuccessful) {
                         _topHeadlines.postValue(response.body()?.articles ?: emptyList())
                         isDataLoaded = true
-                    } else {
-                        // Handle error (e.g., show error message)
                     }
+                } catch (e: UnknownHostException) {
+                    Log.d("HeadlinesViewModel", "Network error: ${e.message}")
+                } catch (e: HttpException) {
+                    Log.d("HeadlinesViewModel", "HTTP error: ${e.message}")
                 } catch (e: Exception) {
-                    // Handle network error
+                    Log.d("HeadlinesViewModel", "Exception: ${e.message}")
                 }
             }
         }

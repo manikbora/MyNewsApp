@@ -30,11 +30,11 @@ class EntertainmentViewModel(private val repository: NewsRepository) : ViewModel
                         isDataLoaded = true
                     }
                 } catch (e: UnknownHostException) {
-                    println("Network error: ${e.message}")
+                    Log.d("EntertainmentViewModel", "Network error: ${e.message}")
                 } catch (e: HttpException) {
-                    println("HTTP error: ${e.message}")
+                    Log.d("EntertainmentViewModel", "HTTP error: ${e.message}")
                 } catch (e: Exception) {
-                    println("Exception: ${e.message}")
+                    Log.d("EntertainmentViewModel", "Exception: ${e.message}")
                 }
             }
         }

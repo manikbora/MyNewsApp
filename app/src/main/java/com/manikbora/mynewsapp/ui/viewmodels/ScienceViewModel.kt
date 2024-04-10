@@ -30,11 +30,11 @@ class ScienceViewModel(private val repository: NewsRepository) : ViewModel() {
                         isDataLoaded = true
                     }
                 } catch (e: UnknownHostException) {
-                    Log.d("NewsApp", "Network error: ${e.message}")
+                    Log.d("ScienceViewModel", "Network error: ${e.message}")
                 } catch (e: HttpException) {
-                    Log.d("NewsApp", "HTTP error: ${e.message}")
+                    Log.d("ScienceViewModel", "HTTP error: ${e.message}")
                 } catch (e: Exception) {
-                    Log.d("NewsApp", "Exception: ${e.message}")
+                    Log.d("ScienceViewModel", "Exception: ${e.message}")
                 }
             }
         }

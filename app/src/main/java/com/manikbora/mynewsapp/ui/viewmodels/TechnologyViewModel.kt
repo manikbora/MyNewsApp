@@ -30,11 +30,11 @@ class TechnologyViewModel(private val repository: NewsRepository) : ViewModel() 
                         isDataLoaded = true
                     }
                 } catch (e: UnknownHostException) {
-                    Log.d("NewsApp", "Network error: ${e.message}")
+                    Log.d("TechnologyViewModel", "Network error: ${e.message}")
                 } catch (e: HttpException) {
-                    Log.d("NewsApp", "HTTP error: ${e.message}")
+                    Log.d("TechnologyViewModel", "HTTP error: ${e.message}")
                 } catch (e: Exception) {
-                    Log.d("NewsApp", "Exception: ${e.message}")
+                    Log.d("TechnologyViewModel", "Exception: ${e.message}")
                 }
             }
         }

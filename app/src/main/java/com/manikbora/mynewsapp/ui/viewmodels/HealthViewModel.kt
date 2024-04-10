@@ -28,16 +28,13 @@ class HealthViewModel(private val repository: NewsRepository) : ViewModel()  {
                         val articles = response.body()?.articles ?: emptyList()
                         _healthNews.postValue(articles)
                         isDataLoaded = true
-                    } else {
-                        val endpoint = response.raw().request.url.toString()
-                        Log.d("NewsApp", "Error fetching business news: $endpoint")
                     }
                 } catch (e: UnknownHostException) {
-                    Log.d("NewsApp", "Network error: ${e.message}")
+                    Log.d("HealthViewModel", "Network error: ${e.message}")
                 } catch (e: HttpException) {
-                    Log.d("NewsApp", "HTTP error: ${e.message}")
+                    Log.d("HealthViewModel", "HTTP error: ${e.message}")
                 } catch (e: Exception) {
-                    Log.d("NewsApp", "Exception: ${e.message}")
+                    Log.d("HealthViewModel", "Exception: ${e.message}")
                 }
             }
         }
