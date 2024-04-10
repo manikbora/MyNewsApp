@@ -3,6 +3,7 @@ package com.manikbora.mynewsapp.data.repository
 import com.manikbora.mynewsapp.data.api.NewsApiService
 import com.manikbora.mynewsapp.data.model.NewsResponse
 import com.manikbora.mynewsapp.utils.Constants
+import com.manikbora.mynewsapp.utils.Constants.Companion.API_KEY
 import retrofit2.Response
 
 class NewsRepository(private val newsApiService: NewsApiService) {
@@ -35,5 +36,8 @@ class NewsRepository(private val newsApiService: NewsApiService) {
         return newsApiService.getTechnologyNews(query = "technology", apiKey = Constants.API_KEY)
     }
 
+    suspend fun searchNews(query: String): Response<NewsResponse> {
+        return newsApiService.searchNews(query, API_KEY)
+    }
 
 }

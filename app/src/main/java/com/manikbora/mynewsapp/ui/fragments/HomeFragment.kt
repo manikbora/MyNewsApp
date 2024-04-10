@@ -10,7 +10,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.manikbora.mynewsapp.R
 import com.manikbora.mynewsapp.databinding.FragmentHomeBinding
-import com.manikbora.mynewsapp.ui.adapters.HeadlinesPagerAdapter
+import com.manikbora.mynewsapp.ui.adapters.HomePagerAdapter
 
 
 class HomeFragment : Fragment(){
@@ -20,7 +20,7 @@ class HomeFragment : Fragment(){
 
     private lateinit var viewPager: ViewPager2
     private lateinit var tabLayout: TabLayout
-    private lateinit var headlinesPagerAdapter: HeadlinesPagerAdapter
+    private lateinit var homePagerAdapter: HomePagerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,8 +38,8 @@ class HomeFragment : Fragment(){
         viewPager = binding.viewPager
         tabLayout = binding.tabLayout
 
-        headlinesPagerAdapter = HeadlinesPagerAdapter(this)
-        viewPager.adapter = headlinesPagerAdapter
+        homePagerAdapter = HomePagerAdapter(this)
+        viewPager.adapter = homePagerAdapter
 
         tabLayout.tabMode = TabLayout.MODE_SCROLLABLE
 
