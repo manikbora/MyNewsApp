@@ -71,7 +71,7 @@ class SearchNewsFragment : Fragment(), NewsAdapter.OnArticleClickListener {
     }
 
     override fun onArticleClicked(articleUrl: String) {
-        val action = HomeFragmentDirections.actionHomeFragmentToArticleFragment(articleUrl)
+        val action = SearchNewsFragmentDirections.actionSearchNewsFragmentToArticleFragment(articleUrl)
         findNavController().navigate(action)
     }
 
