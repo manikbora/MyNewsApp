@@ -21,7 +21,7 @@
             android:id="@+id/et_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Search" />
+            android:hint="@string/search" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <ImageView
@@ -33,7 +33,8 @@
         android:src="@android:drawable/ic_menu_search"
         app:layout_constraintBottom_toBottomOf="@+id/search_input_layout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/search_input_layout" />
+        app:layout_constraintTop_toTopOf="@+id/search_input_layout"
+        android:contentDescription="@string/search_icon"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_search"
