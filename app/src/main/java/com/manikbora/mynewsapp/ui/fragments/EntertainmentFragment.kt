@@ -10,13 +10,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.manikbora.mynewsapp.R
 import com.manikbora.mynewsapp.data.api.RetrofitClient
-import com.manikbora.mynewsapp.data.database.NewsDatabase
 import com.manikbora.mynewsapp.data.repository.NewsRepository
 import com.manikbora.mynewsapp.databinding.FragmentEntertainmentBinding
 import com.manikbora.mynewsapp.ui.adapters.NewsAdapter
-import com.manikbora.mynewsapp.ui.viewmodels.BusinessViewModel
 import com.manikbora.mynewsapp.ui.viewmodels.EntertainmentViewModel
 
 class EntertainmentFragment : Fragment(), NewsAdapter.OnArticleClickListener {
@@ -42,9 +39,7 @@ class EntertainmentFragment : Fragment(), NewsAdapter.OnArticleClickListener {
         // Create instance of NewsApiService
         val newsApiService = RetrofitClient.createService()
 
-        val newsDatabase = NewsDatabase.getDatabase(requireContext()) // Obtain an instance of NewsDatabase
-        val savedArticleDao = newsDatabase.savedArticleDao() // Get the savedArticleDao from NewsDatabase
-        val newsRepository = NewsRepository(newsApiService, savedArticleDao)
+        val newsRepository = NewsRepository(newsApiService)
 
         entertainmentViewModel = ViewModelProvider(this, object : ViewModelProvider.Factory {
             override fun <T : ViewModel> create(modelClass: Class<T>): T {

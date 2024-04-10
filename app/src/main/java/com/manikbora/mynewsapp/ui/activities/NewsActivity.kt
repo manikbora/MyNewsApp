@@ -30,11 +30,6 @@ class NewsActivity : AppCompatActivity() {
                     navController.navigate(R.id.homeFragment)
                     true
                 }
-                R.id.savedNewsFragment -> {
-                    //navController.popBackStack()
-                    navController.navigate(R.id.savedNewsFragment)
-                    true
-                }
                 R.id.searchNewsFragment -> {
                     //navController.popBackStack()
                     navController.navigate(R.id.searchNewsFragment)
