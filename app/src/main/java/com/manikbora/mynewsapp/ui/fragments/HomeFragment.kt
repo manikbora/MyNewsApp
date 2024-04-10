@@ -5,7 +5,6 @@ import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
@@ -15,6 +14,7 @@ import com.manikbora.mynewsapp.databinding.FragmentHomeBinding
 import com.manikbora.mynewsapp.ui.adapters.HomePagerAdapter
 
 
+@Suppress("DEPRECATION")
 class HomeFragment : Fragment(){
 
     private var _binding: FragmentHomeBinding? = null
