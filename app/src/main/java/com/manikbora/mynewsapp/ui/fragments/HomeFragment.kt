@@ -1,9 +1,11 @@
 package com.manikbora.mynewsapp.ui.fragments
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
@@ -74,9 +76,17 @@ class HomeFragment : Fragment(){
     }
 
     private fun loadFragment(fragment: Fragment) {
+        // Show the progress bar before loading the fragment
+        binding.progressBar.visibility = View.VISIBLE
+
         childFragmentManager.beginTransaction()
             .replace(R.id.fragment_container_view, fragment)
             .commit()
+
+        // Hide the progress bar after the fragment is loaded
+        Handler().postDelayed({
+            binding.progressBar.visibility = View.GONE
+        }, 1000) // Delay for 1 second (adjust as needed)
     }
 
 
