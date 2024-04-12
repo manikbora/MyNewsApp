@@ -50,11 +50,11 @@ class BusinessFragment : Fragment(), NewsAdapter.OnArticleClickListener {
                 }
                 throw IllegalArgumentException("Unknown ViewModel class")
             }
-        }).get(BusinessViewModel::class.java)
+        })[BusinessViewModel::class.java]
 
-        businessViewModel.businessNews.observe(viewLifecycleOwner, Observer { articles ->
+        businessViewModel.businessNews.observe(viewLifecycleOwner) { articles ->
             businessNewsAdapter.submitList(articles)
-        })
+        }
 
         // Fetch business news data
         businessViewModel.fetchBusinessNews()

@@ -49,11 +49,11 @@ class ScienceFragment : Fragment(), NewsAdapter.OnArticleClickListener {
                 }
                 throw IllegalArgumentException("Unknown ViewModel class")
             }
-        }).get(ScienceViewModel::class.java)
+        })[ScienceViewModel::class.java]
 
-        scienceViewModel.scienceNews.observe(viewLifecycleOwner, Observer { articles ->
+        scienceViewModel.scienceNews.observe(viewLifecycleOwner) { articles ->
             scienceNewsAdapter.submitList(articles)
-        })
+        }
 
         // Fetch science news data
         scienceViewModel.fetchScienceNews()

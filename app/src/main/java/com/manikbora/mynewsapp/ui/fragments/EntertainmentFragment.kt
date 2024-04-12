@@ -49,11 +49,11 @@ class EntertainmentFragment : Fragment(), NewsAdapter.OnArticleClickListener {
                 }
                 throw IllegalArgumentException("Unknown ViewModel class")
             }
-        }).get(EntertainmentViewModel::class.java)
+        })[EntertainmentViewModel::class.java]
 
-        entertainmentViewModel.entertainmentNews.observe(viewLifecycleOwner, Observer { articles ->
+        entertainmentViewModel.entertainmentNews.observe(viewLifecycleOwner) { articles ->
             entertainmentNewsAdapter.submitList(articles)
-        })
+        }
 
         // Fetch entertainment news data
         entertainmentViewModel.fetchEntertainmentNews()

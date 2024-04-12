@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -54,20 +55,22 @@ class SearchNewsFragment : Fragment(), NewsAdapter.OnArticleClickListener {
                 }
                 throw IllegalArgumentException("Unknown ViewModel class")
             }
-        }).get(SearchNewsViewModel::class.java)
+        })[SearchNewsViewModel::class.java]
 
-
-
-        binding.ivSearch.setOnClickListener {
-            val query = binding.etSearch.text.toString().trim()
-            if (query.isNotEmpty()) {
-                searchViewModel.searchNews(query)
+        binding.etSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let { searchViewModel.searchNews(it)}
+                return true
             }
-        }
 
-        searchViewModel.searchResults.observe(viewLifecycleOwner, Observer { articles ->
-            newsAdapter.submitList(articles)
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return true
+            }
         })
+
+        searchViewModel.searchResults.observe(viewLifecycleOwner) { articles ->
+            newsAdapter.submitList(articles)
+        }
     }
 
     override fun onArticleClicked(articleUrl: String) {

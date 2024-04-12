@@ -52,12 +52,12 @@ class HeadlinesFragment : Fragment(), NewsAdapter.OnArticleClickListener {
                 }
                 throw IllegalArgumentException("Unknown ViewModel class")
             }
-        }).get(HeadlinesViewModel::class.java)
+        })[HeadlinesViewModel::class.java]
 
 
-        headlinesViewModel.topHeadlines.observe(viewLifecycleOwner, Observer { articles ->
+        headlinesViewModel.topHeadlines.observe(viewLifecycleOwner) { articles ->
             headlinesNewsAdapter.submitList(articles)
-        })
+        }
 
         // Fetch top headlines when the fragment is created
         headlinesViewModel.fetchTopHeadlines("in")

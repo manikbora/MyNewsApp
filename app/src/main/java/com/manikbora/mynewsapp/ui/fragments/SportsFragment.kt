@@ -49,11 +49,11 @@ class SportsFragment : Fragment(), NewsAdapter.OnArticleClickListener {
                 }
                 throw IllegalArgumentException("Unknown ViewModel class")
             }
-        }).get(SportsViewModel::class.java)
+        })[SportsViewModel::class.java]
 
-        sportsViewModel.sportsNews.observe(viewLifecycleOwner, Observer { articles ->
+        sportsViewModel.sportsNews.observe(viewLifecycleOwner) { articles ->
             sportsNewsAdapter.submitList(articles)
-        })
+        }
 
         // Fetch sports news data
         sportsViewModel.fetchSportsNews()

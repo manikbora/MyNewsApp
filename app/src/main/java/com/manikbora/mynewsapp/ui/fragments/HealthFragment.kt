@@ -49,11 +49,11 @@ class HealthFragment : Fragment(), NewsAdapter.OnArticleClickListener {
                 }
                 throw IllegalArgumentException("Unknown ViewModel class")
             }
-        }).get(HealthViewModel::class.java)
+        })[HealthViewModel::class.java]
 
-        healthViewModel.healthNews.observe(viewLifecycleOwner, Observer { articles ->
+        healthViewModel.healthNews.observe(viewLifecycleOwner) { articles ->
             healthNewsAdapter.submitList(articles)
-        })
+        }
 
         // Fetch health news data
         healthViewModel.fetchHealthNews()
