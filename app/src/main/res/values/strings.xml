@@ -9,4 +9,5 @@
     <string name="search">Search</string>
     <string name="search_icon">Search Icon</string>
     <string name="news_image">News Image</string>
+    <string name="news_world">News World</string>
 </resources>

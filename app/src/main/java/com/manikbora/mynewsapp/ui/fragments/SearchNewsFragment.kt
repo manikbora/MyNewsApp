@@ -6,17 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.manikbora.mynewsapp.R
 import com.manikbora.mynewsapp.data.api.RetrofitClient
 import com.manikbora.mynewsapp.data.repository.NewsRepository
 import com.manikbora.mynewsapp.databinding.FragmentSearchNewsBinding
 import com.manikbora.mynewsapp.ui.adapters.NewsAdapter
-import com.manikbora.mynewsapp.ui.viewmodels.BusinessViewModel
 import com.manikbora.mynewsapp.ui.viewmodels.SearchNewsViewModel
 
 class SearchNewsFragment : Fragment(), NewsAdapter.OnArticleClickListener {
@@ -28,7 +25,7 @@ class SearchNewsFragment : Fragment(), NewsAdapter.OnArticleClickListener {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentSearchNewsBinding.inflate(inflater, container, false)
         return binding.root
     }
