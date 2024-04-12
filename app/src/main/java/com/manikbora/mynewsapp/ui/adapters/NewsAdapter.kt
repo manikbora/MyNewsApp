@@ -10,6 +10,9 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.manikbora.mynewsapp.R
 import com.manikbora.mynewsapp.data.model.Article
 import com.manikbora.mynewsapp.databinding.ItemNewsBinding
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class NewsAdapter(private val listener: OnArticleClickListener) :
     ListAdapter<Article, NewsAdapter.ViewHolder>(DiffCallback()) {
@@ -37,7 +40,7 @@ class NewsAdapter(private val listener: OnArticleClickListener) :
             binding.tvTitle.text = article.title
             binding.tvDescription.text = article.description
             binding.tvSource.text = article.source.name
-            binding.tvDateTime.text = article.publishedAt
+            binding.tvDateTime.text = formatDate(article.publishedAt)
 
             // Load image using Glide
             Glide.with(binding.root)
@@ -45,6 +48,13 @@ class NewsAdapter(private val listener: OnArticleClickListener) :
                 .placeholder(R.drawable.placeholder) // Set placeholder image
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(binding.ivArticleImage)
+        }
+
+        private fun formatDate(date: String): String {
+            val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
+            val outputFormat = SimpleDateFormat("dd-MM-yyyy hh:mm a", Locale.getDefault())
+            val parsedDate: Date = inputFormat.parse(date) ?: Date()
+            return outputFormat.format(parsedDate)
         }
     }
 

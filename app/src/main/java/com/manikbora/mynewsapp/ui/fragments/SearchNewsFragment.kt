@@ -18,7 +18,8 @@ import com.manikbora.mynewsapp.ui.viewmodels.SearchNewsViewModel
 
 class SearchNewsFragment : Fragment(), NewsAdapter.OnArticleClickListener {
 
-    private lateinit var binding: FragmentSearchNewsBinding
+    private var _binding: FragmentSearchNewsBinding? = null
+    private val binding get() = _binding!!
     private lateinit var searchViewModel: SearchNewsViewModel
     private lateinit var newsAdapter: NewsAdapter
 
@@ -26,7 +27,7 @@ class SearchNewsFragment : Fragment(), NewsAdapter.OnArticleClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentSearchNewsBinding.inflate(inflater, container, false)
+        _binding = FragmentSearchNewsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -61,6 +62,10 @@ class SearchNewsFragment : Fragment(), NewsAdapter.OnArticleClickListener {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText.isNullOrEmpty()) {
+                    // If the search text is cleared, clear the RecyclerView
+                    newsAdapter.submitList(null)
+                }
                 return true
             }
         })
@@ -75,5 +80,8 @@ class SearchNewsFragment : Fragment(), NewsAdapter.OnArticleClickListener {
         findNavController().navigate(action)
     }
 
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
